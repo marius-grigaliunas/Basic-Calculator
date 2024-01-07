@@ -15,52 +15,59 @@ for(let i = 0; i < numberButtons.length; i++) {
     });
 }
 
-pointButton.addEventListener("click", () => {
+const enterKey = (number) => {
+    outputString += String(number);
+    output.innerHTML = outputString;
+};
+
+const point = () => {
     outputString += '.';
     output.innerHTML = outputString;
-});
+};
 
-clearButton.addEventListener("click", () => {
+const clear = () => {
     expression = "";
     outputString = "";
     output.innerHTML = "";
-});
+};
 
-backspaceButton.addEventListener("click", () => {})
+const backspaceDelte = () => {   outputString = outputString.slice(0, outputString.length - 1);
+    output.innerHTML = outputString;
+};
 
-operatorButtons[0].addEventListener("click", () => {
+const division = () => {
     expression += `${outputString} / `;
     outputString = ""; output.innerHTML = outputString;
 
 
     console.log(expression);
-});
+};
 
-operatorButtons[1].addEventListener("click", () => {
+const multiplication = () => {
     expression += `${outputString} * `;
     outputString = ""; output.innerHTML = outputString;
 
 
     console.log(expression);
-});
+};
 
-operatorButtons[2].addEventListener("click", () => {
-    expression += `${outputString} + `;
+const addition = () => {
+        expression += `${outputString} + `;
     outputString = ""; output.innerHTML = outputString;
 
 
     console.log(expression);
-});
+};
 
-operatorButtons[3].addEventListener("click", () => {
+const subtraction = () => {
     expression += `${outputString} - `;
     outputString = ""; output.innerHTML = outputString;
 
 
     console.log(expression);
-});
+};
 
-operatorButtons[4].addEventListener("click", () => {
+const equal = () => {
     expression += `${outputString}`;
     outputString = "";
     console.log(expression);
@@ -79,7 +86,7 @@ operatorButtons[4].addEventListener("click", () => {
     expression = "";
     outputString = fixedExpression[0];
     output.innerHTML = outputString;
-});
+};
 
 const multiplicationAndDivision = (numberArray) => {
     for(let i = 0; i < numberArray.length; i++) {
@@ -114,4 +121,90 @@ const additionAndSubtraction = (numberArray) => {
     return numberArray;
 };
 
-console.log(isNaN('-'));
+
+
+pointButton.addEventListener("click", point);
+
+clearButton.addEventListener("click", clear);
+
+backspaceButton.addEventListener("click", backspaceDelte);
+
+operatorButtons[0].addEventListener("click", division);
+
+operatorButtons[1].addEventListener("click", multiplication);
+
+operatorButtons[2].addEventListener("click", addition);
+
+operatorButtons[3].addEventListener("click", subtraction);
+
+operatorButtons[4].addEventListener("click", equal);
+
+window.addEventListener("keydown", (ev) => {
+    switch(ev.code) {
+        case 'Digit0':
+        case 'Numpad0':
+            enterKey(0);
+            break;
+        case 'Digit1':
+        case 'Numpad1':
+            enterKey(1);
+            break;
+        case 'Digit2':
+        case 'Numpad2':
+            enterKey(2);
+            break; 
+        case 'Digit3':
+        case 'Numpad3':
+            enterKey(3);
+            break;
+        case 'Digit4':
+        case 'Numpad4':
+            enterKey(4);
+            break;
+        case 'Digit5':
+        case 'Numpad5':
+            enterKey(5);
+            break;
+        case 'Digit6':    
+        case 'Numpad6':
+            enterKey(6);
+            break;
+        case 'Digit7':
+        case 'Numpad7':
+            enterKey(7);
+            break; 
+        case 'Digit8':
+        case 'Numpad8':
+            enterKey(8);
+            break;
+        case 'Digit9':
+        case 'Numpad9':
+            enterKey(9);
+            break;
+        case 'NumpadDecimal':
+            point();
+            break;
+        case 'NumpadAdd':
+            addition();
+            break; 
+        case 'NumpadSubtract':
+            subtraction();
+            break;
+        case 'NumpadMultiply':
+            multiplication();
+            break;
+        case 'NumpadDivide':
+            division();
+            break;
+        case 'Escape':
+            clear();
+            break;
+        case 'NumpadEnter':
+        case "Enter":
+            equal();
+            break; 
+        case 'Backspace':
+            backspaceDelte();
+            break; 
+    }
+});
